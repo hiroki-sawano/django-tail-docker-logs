@@ -1,0 +1,1 @@
+# django-tail-docker-logs
