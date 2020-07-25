@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <p>> docker logs -f {{ request.resolver_match.kwargs.container_name }}</p>
+    <textarea id="console" rows="30" cols="100" readonly></textarea>
+    <script>
+    $(function() {
+      let ES = new EventSource(
+        "{% url 'tail_log' request.resolver_match.kwargs.container_name %}"
+      );
+      ES.onmessage = function(e) {
+        $('#console').append(`${e.data}\n`);
+        $('#console').scrollTop(
+          $('#console')[0].scrollHeight - $('#console').height()
+        );
+      };
+    });
+    </script>
+  </body>
+</html>
