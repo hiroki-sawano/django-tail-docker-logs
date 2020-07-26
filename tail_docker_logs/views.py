@@ -3,7 +3,6 @@ from datetime import datetime
 
 import docker
 from django.http import StreamingHttpResponse
-from django.views.decorators.http import condition
 
 
 def tail_log(request, container_name):
